@@ -12,7 +12,7 @@ This project is structured as a small backend service with:
 - MongoDB models managed through Mongoose
 - product CRUD operations
 
-The API is mounted from [src/server.js](/c:/Users/joe/Desktop/level%202%20task/product-api/src/server.js).
+The API is mounted from [src/server.js](src/server.js).
 
 ## Tech Stack
 
@@ -45,6 +45,8 @@ product-api/
     models/
       Product.js
       User.js
+    scripts/
+      seedAdmin.js
     routes/
       authRoutes.js
       productRoutes.js
@@ -66,7 +68,7 @@ product-api/
 
 ## Environment Variables
 
-The current `.env` file uses:
+Example `.env` values:
 
 ```env
 PORT=8080
@@ -98,6 +100,8 @@ npm install
 
 Use the package scripts in [package.json](/c:/Users/joe/Desktop/level%202%20task/product-api/package.json):
 
+Use the package scripts in [package.json](package.json):
+
 ```bash
 npm start
 ```
@@ -108,11 +112,17 @@ For development with file watching:
 npm run dev
 ```
 
-The server starts on `http://localhost:5000` unless `PORT` is overridden.
+The server starts on `http://localhost:<PORT>`. If `PORT` is not set, the code defaults to `5000`.
+
+To seed or update an admin user:
+
+```bash
+npm run seed:admin
+```
 
 ## Database Connection
 
-MongoDB is initialized in [src/config/db.js](/c:/Users/joe/Desktop/level%202%20task/product-api/src/config/db.js) using `mongoose.connect(process.env.MONGO_URI)`.
+MongoDB is initialized in [src/config/db.js](src/config/db.js) using `mongoose.connect(process.env.MONGO_URI)`.
 
 If the connection fails, the process exits immediately.
 
@@ -126,7 +136,7 @@ Protected routes expect this header:
 Authorization: Bearer <token>
 ```
 
-The auth middleware in [src/middleware/authMiddleware.js](/c:/Users/joe/Desktop/level%202%20task/product-api/src/middleware/authMiddleware.js) will:
+The auth middleware in [src/middleware/authMiddleware.js](src/middleware/authMiddleware.js) will:
 
 - extract the bearer token
 - verify it with `JWT_SECRET`
@@ -137,7 +147,7 @@ If the token is missing, invalid, expired, or the user no longer exists, the API
 
 ### Role Authorization
 
-The role middleware in [src/middleware/roleMiddleware.js](/c:/Users/joe/Desktop/level%202%20task/product-api/src/middleware/roleMiddleware.js) restricts certain actions to allowed roles.
+The role middleware in [src/middleware/roleMiddleware.js](src/middleware/roleMiddleware.js) restricts certain actions to allowed roles.
 
 Current behavior:
 
@@ -147,8 +157,10 @@ Current behavior:
 ## API Base URL
 
 ```text
-http://localhost:5000
+http://localhost:<PORT>
 ```
+
+When `PORT` is omitted, the API listens on `http://localhost:5000`.
 
 ## Available Routes
 
@@ -169,7 +181,7 @@ Example response:
 
 ### Product Routes
 
-Defined in [src/routes/productRoutes.js](/c:/Users/joe/Desktop/level%202%20task/product-api/src/routes/productRoutes.js).
+Defined in [src/routes/productRoutes.js](src/routes/productRoutes.js).
 
 | Method | Endpoint              | Access             | Description           |
 | ------ | --------------------- | ------------------ | --------------------- |
@@ -284,7 +296,7 @@ Example response:
 
 ### Authentication Routes
 
-Authentication routes are defined in [src/routes/authRoutes.js](/c:/Users/joe/Desktop/level%202%20task/product-api/src/routes/authRoutes.js).
+Authentication routes are defined in [src/routes/authRoutes.js](src/routes/authRoutes.js).
 
 | Method | Endpoint               | Access | Description                          |
 | ------ | ---------------------- | ------ | ------------------------------------ |
@@ -293,8 +305,8 @@ Authentication routes are defined in [src/routes/authRoutes.js](/c:/Users/joe/De
 
 Authentication business logic exists in:
 
-- [src/controllers/authController.js](/c:/Users/joe/Desktop/level%202%20task/product-api/src/controllers/authController.js)
-- [src/services/authService.js](/c:/Users/joe/Desktop/level%202%20task/product-api/src/services/authService.js)
+- [src/controllers/authController.js](src/controllers/authController.js)
+- [src/services/authService.js](src/services/authService.js)
 
 Current auth behavior:
 
@@ -344,7 +356,7 @@ Expected response shape after successful registration or login:
 
 ## Product Data Model
 
-Defined in [src/models/Product.js](/c:/Users/joe/Desktop/level%202%20task/product-api/src/models/Product.js).
+Defined in [src/models/Product.js](src/models/Product.js).
 
 Fields:
 
@@ -364,7 +376,7 @@ Indexes:
 
 ## User Data Model
 
-Defined in [src/models/User.js](/c:/Users/joe/Desktop/level%202%20task/product-api/src/models/User.js).
+Defined in [src/models/User.js](src/models/User.js).
 
 Fields:
 
